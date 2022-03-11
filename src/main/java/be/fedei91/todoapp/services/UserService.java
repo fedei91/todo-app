@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface UserService {
     void create(User user);
     List<User> findAll();
+    User findUserByEmail(String email);
 }
