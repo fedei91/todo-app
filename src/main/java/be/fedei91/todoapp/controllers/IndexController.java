@@ -19,4 +19,11 @@ class IndexController {
     public String index() {
         return "index";
     }
+
+    @GetMapping("users")
+    public ModelAndView showUsers() {
+        var modelAndView = new ModelAndView("users");
+        modelAndView.addObject("users", userService.findAll());
+        return modelAndView;
+    }
 }
