@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments::head(title='Login')">
+	</head>
+	<body>
+		<nav th:replace="fragments::menu"></nav>
+		<div class="container text-center">
+		<div class="container p-3 my-3 bg-dark text-white">
+			<h1>Login</h1>
+		</div>
+
+		<div class="container p-3 my-3 border">
+			<form th:action="@{/login}" method="post">
+				<input name="username" required autofocus placeholder="Email">
+				<input name="password" type="password" required placeholder="Paswoord">
+				<button>Submit</button>
+			</form>
+		</div>
+
+		<div class="container p-3 my-3 border">
+			<a class="nav-link" th:href="@{/login/register/form}">New user? Register!</a>
+		</div>
+		<div th:if="${param.error}">
+			<div class="container p-3 my-3 border">
+				Wrong username or password
+			</div>
+		</div>
+		</div>
+	</body>
+</html>

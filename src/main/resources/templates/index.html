@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head th:replace="fragments::head(title='Index')">
+	</head>
+	<body>
+		<nav th:replace="fragments::menu"></nav>
+		<div class="container text-center">
+			<div class="container p-3 my-3 bg-dark text-white">
+				<h1>To Do app</h1>
+			</div>
+			<div class="container p-3 my-3 border">
+				<div>
+					<a th:href="@{/login}">Login</a>
+				</div>
+				<div>
+					<a th:href="@{/users}">List of users</a>
+				</div>
+				<div sec:authorize="isAuthenticated()">
+					<form method="post" th:action="@{/logout}">
+						<button>Sign off</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
