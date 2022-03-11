@@ -1,7 +1,10 @@
 <div xmlns:th="http://www.thymeleaf.org">
 	<nav th:fragment="menu" class="navbar navbar-expand-sm bg-white">
-		<ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link" th:href="@{/}">Index</a></li>
+		<ul class="container text-center">
+			<a class="nav-link" th:href="@{/}">Index</a>
+			<a class="nav-link" th:href="@{/login}">Login</a>
+			<a class="nav-link" th:href="@{/login/register/form}">Register</a>
+			<a class="nav-link" th:href="@{/users}">Users</a>
 		</ul>
 	</nav>
 	<head th:fragment="head(title)">
