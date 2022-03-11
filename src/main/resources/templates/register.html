@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head th:replace="fragments::head(title='Registration')">
+	</head>
+	<body>
+		<nav th:replace="fragments::menu"></nav>
+		<div class="container text-center">
+			<div class="container p-3 my-3 bg-dark text-white">
+				<h1>Register</h1>
+			</div>
+			<div class="container p-3 my-3 border">
+				<form method="post" th:object="${registerForm}" th:action="@{/login/register}">
+					<input name="email" required autofocus placeholder="Email">
+					<input name="password" type="password" required placeholder="Password">
+					<input name="matchingpassword" type="password" required placeholder="Repeat password">
+					<button>Register</button>
+				</form>
+				<th:block th:object="${existingUser}">
+					<div th:if="${existingUser}">
+						An user is already register as <strong th:text="*{email}"></strong>
+					</div>
+				</th:block>
+			</div>
+		</div>
+	</body>
+</html>
