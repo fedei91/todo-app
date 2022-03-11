@@ -7,13 +7,12 @@ use todoapp;
 create table users (
   id int unsigned not null auto_increment primary key,
   email varchar(100) not null,
-`password` varchar(255) NOT NULL,
-enabled bit NOT NULL default 1);
- 
+`password` varchar(255) not null);
+
 create table todoitems (
 	id int unsigned not null auto_increment primary key,
     itemDescription varchar(100) not null,
-    itemDone boolean not null,
+    itemDone boolean default 0,
     userId int unsigned not null,
     constraint itemsUsers foreign key(userId) references users(id)
 );
