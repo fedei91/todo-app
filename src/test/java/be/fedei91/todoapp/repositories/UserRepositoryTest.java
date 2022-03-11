@@ -1,5 +1,6 @@
 package be.fedei91.todoapp.repositories;
 
+import be.fedei91.todoapp.domain.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
@@ -21,6 +22,20 @@ class UserRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
         return jdbcTemplate.queryForObject(
                 "select id from users where email = 'test@email.org'", Long.class
         );
+    }
+
+    @Test
+    void save() {
+        var user = new User("test2@example.org", "mega_secure_password");
+        userRepository.save(user);
+        var id = user.getId();
+        assertThat(id).isPositive();
+        assertThat(countRowsInTableWhere(USERS, "id = " + id)).isOne();
+    }
+
+    @Test
+    void findUserByEmail() {
+
     }
 
     @Test
