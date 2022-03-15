@@ -12,7 +12,6 @@
 				<form method="post" th:object="${registerForm}" th:action="@{/login/register}">
 					<input name="email" required autofocus placeholder="Email">
 					<input name="password" type="password" required placeholder="Password">
-					<input name="matchingpassword" type="password" required placeholder="Repeat password">
 					<button>Register</button>
 				</form>
 				<th:block th:object="${existingUser}">

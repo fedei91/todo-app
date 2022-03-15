@@ -31,16 +31,18 @@ class UserController {
     @GetMapping("register/form")
     public ModelAndView formRegister() {
         var modelAndView = new ModelAndView("register");
-        modelAndView.addObject(new RegisterForm(null, null, null));
+        modelAndView.addObject(new RegisterForm(null, null));
         return modelAndView;
     }
 
     @PostMapping("register")
     public ModelAndView userRegister(@Valid RegisterForm form, Errors errors) {
-        var modelAndView = new ModelAndView("register");
+        var modelAndView = new ModelAndView("login");
         var userEmailToRegister = form.getEmail();
-        var userPasswordToRegister = form.getPassword();
-        var encryptedPassword = new BCryptPasswordEncoder().encode(userPasswordToRegister);
+        var originalPassword = form.getPassword();
+
+        var encryptedPassword = new BCryptPasswordEncoder().encode(originalPassword);
+
         var userExists = userService.findUserByEmail(userEmailToRegister);
 
         if (errors.hasErrors()) {

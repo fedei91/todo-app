@@ -10,11 +10,11 @@ public class User {
     private long id;
     @Column(unique = true)
     private String email;
-    private String password;
+    private String paswoord;
 
-    public User(String email, String password) {
+    public User(String email, String paswoord) {
         this.email = email;
-        this.password = password;
+        this.paswoord = paswoord;
     }
 
     protected User() {}
@@ -27,8 +27,8 @@ public class User {
         return email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPaswoord() {
+        return paswoord;
     }
 
     public void setId(long id) {
@@ -39,7 +39,7 @@ public class User {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPaswoord(String paswoord) {
+        this.paswoord = paswoord;
     }
 }

@@ -1,10 +1,13 @@
 package be.fedei91.todoapp.security;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
@@ -16,12 +19,15 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.dataSource = dataSource;
     }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery(
-                        "select email as username, password as password, true as enabled" +
-                                " from users where email = ?")
+                .usersByUsernameQuery("select email as username, paswoord as password, true as enabled from users where email = ?")
                 .authoritiesByUsernameQuery("select ?, 'user'");
     }
 
@@ -39,7 +45,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests(
                 requests -> requests
                         .mvcMatchers("/").permitAll()
-                        .mvcMatchers("/todolist").authenticated());
+                        .mvcMatchers("/users").authenticated());
         http.logout(logout -> logout.logoutSuccessUrl("/"));
     }
 }
