@@ -5,18 +5,12 @@ create database todoapp charset utf8mb4;
 use todoapp;
 
 create table users (
-  id int unsigned not null auto_increment primary key,
-  email varchar(100) not null,
-`password` varchar(255) not null);
+                       id int unsigned not null auto_increment primary key,
+                       email varchar(100) not null,
+                       paswoord varchar(100) not null);
 
-create table todoitems (
-	id int unsigned not null auto_increment primary key,
-    itemDescription varchar(100) not null,
-    itemDone boolean default 0,
-    userId int unsigned not null,
-    constraint itemsUsers foreign key(userId) references users(id)
-);
+alter table users change email email varchar(100) not null unique;
 
 create user if not exists fedei91 identified by 'fedei91';
 grant select,insert on users to fedei91;
-grant select,insert,update on todoitems to fedei91;
+-- grant select,insert,update on todoitems to fedei91;
