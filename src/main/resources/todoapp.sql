@@ -11,6 +11,14 @@ create table users (
 
 alter table users change email email varchar(100) not null unique;
 
+create table todoitems (
+                           id int unsigned not null auto_increment primary key,
+                           itemDescription varchar(100) not null,
+                           itemDone boolean default 0,
+                           userId int unsigned not null,
+                           constraint itemsUsers foreign key(userId) references users(id)
+);
+
 create user if not exists fedei91 identified by 'fedei91';
 grant select,insert on users to fedei91;
--- grant select,insert,update on todoitems to fedei91;
+grant select,insert,update on todoitems to fedei91;
