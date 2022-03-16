@@ -1,7 +1,10 @@
-<div xmlns:th="http://www.thymeleaf.org">
+<div xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 	<nav th:fragment="menu" class="navbar navbar-expand-sm bg-white">
 		<ul class="container text-center">
 			<a class="nav-link" th:href="@{/}">Index</a>
+			<a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">Login</a>
+			<a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/users/register/form}">Register</a>
+			<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/todos}">To do's</a>
 			<a class="nav-link" th:href="@{/users}">Users</a>
 		</ul>
 	</nav>

@@ -1,6 +1,7 @@
 package be.fedei91.todoapp.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")

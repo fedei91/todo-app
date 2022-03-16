@@ -46,8 +46,9 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                 requests -> requests
                         .mvcMatchers("/").permitAll()
                         .mvcMatchers("/login").anonymous()
-                        .mvcMatchers("/login/register/form").anonymous()
-                        .mvcMatchers("/users").authenticated());
+                        .mvcMatchers("/users/register/form").anonymous()
+                        .mvcMatchers("/users").authenticated()
+                        .mvcMatchers("/todos").authenticated());
         http.logout(logout -> logout.logoutSuccessUrl("/"));
     }
 }
