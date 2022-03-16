@@ -1,0 +1,54 @@
+package be.fedei91.todoapp.services;
+
+import be.fedei91.todoapp.domain.TodoItem;
+import be.fedei91.todoapp.domain.User;
+import be.fedei91.todoapp.exceptions.TodosNotFoundException;
+import be.fedei91.todoapp.repositories.TodosRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+@Transactional
+class DefaultTodosService implements TodosService {
+    private final TodosRepository todosRepository;
+
+    DefaultTodosService(TodosRepository todosRepository) {
+        this.todosRepository = todosRepository;
+    }
+
+    @Override
+    public void create(TodoItem item) {
+        todosRepository.save(item);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<TodoItem> findAllByUserEmail(String email) {
+        return todosRepository.findAllByUserEmail(email);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<TodoItem> findTodoById(long id) {
+        return todosRepository.findById(id);
+    }
+
+    @Override
+    public void update(TodoItem item) {
+        todosRepository.save(item);
+    }
+
+    @Override
+    public void delete(long id) {
+        try {
+            todosRepository.deleteById(id);
+        }
+        catch (EmptyResultDataAccessException ex) {
+            throw new TodosNotFoundException();
+        }
+    }
+}
