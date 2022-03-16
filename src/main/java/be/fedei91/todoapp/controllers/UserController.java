@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("login")
+@RequestMapping("users")
 class UserController {
     private final UserService userService;
 
@@ -23,10 +23,11 @@ class UserController {
     }
 
     @GetMapping
-    public String login() {
-        return "login";
+    public ModelAndView showUsers() {
+        var modelAndView = new ModelAndView("users");
+        modelAndView.addObject("users", userService.findAll());
+        return modelAndView;
     }
-
 
     @GetMapping("register/form")
     public ModelAndView formRegister() {

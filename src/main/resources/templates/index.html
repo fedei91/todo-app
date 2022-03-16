@@ -6,16 +6,9 @@
 		<nav th:replace="fragments::menu"></nav>
 		<div class="container text-center">
 			<div class="container p-3 my-3 bg-dark text-white">
-				<h1>To Do app</h1>
+				<h1>ToDo app</h1>
 			</div>
-			<div class="container p-3 my-3 border">
-				<div sec:authorize="isAnonymous()">
-					<a th:href="@{/login}">Login</a>
-				</div>
-				<div>
-					<a th:href="@{/users}">List of users</a>
-				</div>
-			</div>
+
 			<div sec:authorize="isAuthenticated()">
 				<div class="container p-3 my-3 border">
 					<form method="post" th:action="@{/logout}">
