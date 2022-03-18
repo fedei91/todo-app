@@ -1,7 +1,6 @@
 package be.fedei91.todoapp.services;
 
 import be.fedei91.todoapp.domain.TodoItem;
-import be.fedei91.todoapp.domain.User;
 import be.fedei91.todoapp.exceptions.TodosNotFoundException;
 import be.fedei91.todoapp.repositories.TodosRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -21,8 +20,8 @@ class DefaultTodosService implements TodosService {
     }
 
     @Override
-    public void create(TodoItem item) {
-        todosRepository.save(item);
+    public TodoItem create(TodoItem item) {
+        return todosRepository.save(item);
     }
 
     @Override
@@ -38,8 +37,8 @@ class DefaultTodosService implements TodosService {
     }
 
     @Override
-    public void update(TodoItem item) {
-        todosRepository.save(item);
+    public TodoItem update(TodoItem item) {
+        return todosRepository.save(item);
     }
 
     @Override
