@@ -1,7 +1,7 @@
 package be.fedei91.todoapp.domain;
 
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.Email;
 
 @Entity
 @Table(name = "users")
@@ -10,6 +10,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(unique = true)
+    @Email
     private String email;
     private String paswoord;
 

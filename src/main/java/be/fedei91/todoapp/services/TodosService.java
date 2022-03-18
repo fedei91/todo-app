@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface TodosService {
     List<TodoItem> findAllByUserEmail(String email);
     Optional<TodoItem> findTodoById(long id);
-    void create(TodoItem item);
+    TodoItem create(TodoItem item);
     void delete(long id);
-    void update(TodoItem item);
+    TodoItem update(TodoItem item);
 }

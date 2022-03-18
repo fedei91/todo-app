@@ -1,6 +1,7 @@
 package be.fedei91.todoapp.domain;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 
 @Entity
 @Table(name = "todoitems")
@@ -14,9 +15,10 @@ public class TodoItem {
     @JoinColumn(name = "userId")
     private User user;
 
-    public TodoItem(String itemDescription, Boolean itemDone) {
+    public TodoItem(String itemDescription, Boolean itemDone, User user) {
         this.itemDescription = itemDescription;
         this.itemDone = itemDone;
+        this.user = user;
     }
 
     protected TodoItem() {}

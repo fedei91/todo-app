@@ -1,11 +1,13 @@
 package be.fedei91.todoapp.forms;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class RegisterForm {
     @NotNull
     @NotEmpty
+    @Email
     private String email;
     @NotNull
     @NotEmpty
