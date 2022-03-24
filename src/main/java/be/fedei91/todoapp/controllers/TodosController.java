@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("todos")
@@ -46,5 +47,11 @@ class TodosController {
         todosService.create(newItem);
 
         return new ModelAndView("redirect:/todos");
+    }
+
+    @PostMapping("/deleteitem")
+    public String delete(long id) {
+        todosService.delete(id);
+        return "redirect:/todos";
     }
 }

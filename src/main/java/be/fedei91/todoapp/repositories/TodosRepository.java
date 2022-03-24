@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface TodosRepository extends JpaRepository<TodoItem, Long> {
     List<TodoItem> findAllByUserEmail(String email);
+
+    void deleteById(long id);
 }
