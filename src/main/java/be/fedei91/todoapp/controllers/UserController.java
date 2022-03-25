@@ -38,7 +38,7 @@ class UserController {
 
     @PostMapping("register")
     public ModelAndView userRegister(@Valid RegisterForm form, Errors errors) {
-        var modelAndView = new ModelAndView("login");
+        var modelAndView = new ModelAndView("register");
         var userEmailToRegister = form.getEmail();
         var originalPassword = form.getPassword();
 
@@ -56,6 +56,6 @@ class UserController {
 
         userService.create(new User(userEmailToRegister, encryptedPassword));
 
-        return modelAndView;
+        return new ModelAndView("todos");
     }
 }
