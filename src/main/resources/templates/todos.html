@@ -13,36 +13,45 @@
 			</div>
 
 			<th:block th:if="${todos}" th:object="${todos}">
-				<div class="container p-3 my-3 border">
-					<table class="table table-striped">
-						<tr>
-							<!-- <th scope="col">#</th> -->
-							<th scope="col">Item description</th>
-							<th scope="col">Done</th>
-							<th scope="col"></th>
-						</tr>
-						</thead>
-						<tbody>
-							<tr th:each="todo : ${todos}">
-								<!-- <th scope="row" th:text="${todo.id}"></th> -->
-								<th scope="row" th:text="${todo.itemDescription}"></th>
-								<th scope="row" th:text="${todo.itemDone}"></th>
-								<th scope="row">
-									<input type="checkbox" class="checkbox">
-								</th>
+
+				<form th:action="@{/todos/deleteitems}" method="post">
+					<div class="container p-3 my-3 border">
+						<table class="table table-striped">
+							<tr>
+								<!-- <th scope="col">#</th> -->
+								<th scope="col">Item description</th>
+								<th scope="col">Done</th>
+								<th scope="col"></th>
 							</tr>
-						</tbody>
-					</table>
-				</div>
+							</thead>
+							<tbody>
+								<tr th:each="todo : ${todos}" th:object="${todo}">
+									<!-- <th scope="row" th:text="${todo.id}"></th> -->
+									<th scope="row" th:text="${todo.itemDescription}"></th>
+									<th scope="row" th:text="${todo.itemDone}"></th>
+									<th scope="row">
+										<input th:field="${todoItemForm.selectedTodoItemsIds}" type="checkbox" name="id" th:value="*{id}">
+									</th>
+								</tr>
+							</tbody>
+						</table>
+						<button>Delete items</button>
+					</div>
+				</form>
 			</th:block>
 
+			<div class="container p-3 my-3 border">
+				<form method="post" th:action="@{/todos/additem}" th:object="${addItemForm}">
+					<input th:field="*{description}" type="text">
+					<button>Add item</button>
+				</form>
+			</div>
+
+			<div class="container p-3 my-3 border">
+				<button>Update</button>
+			</div>
+
 			<div sec:authorize="isAuthenticated()">
-				<div class="container p-3 my-3 border">
-					<form method="post" th:action="@{/todos/additem}" th:object="${addItemForm}">
-						<input th:field="*{description}" type="text">
-						<button>Add item</button>
-					</form>
-				</div>
 				<div class="container p-3 my-3 border">
 					<form method="post" th:action="@{/logout}">
 						<button>Sign off</button>

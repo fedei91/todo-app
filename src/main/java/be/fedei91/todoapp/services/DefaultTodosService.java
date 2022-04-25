@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -45,9 +46,14 @@ class DefaultTodosService implements TodosService {
     public void delete(long id) {
         try {
             todosRepository.deleteById(id);
-        }
-        catch (EmptyResultDataAccessException ex) {
+        } catch (EmptyResultDataAccessException ex) {
             throw new TodosNotFoundException();
         }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<TodoItem> findItemsByIds(Set<Long> ids) {
+        return todosRepository.findItemsByIds(ids);
     }
 }

@@ -11,7 +11,7 @@ public class TodoItem {
     private long id;
     private String itemDescription;
     private Boolean itemDone;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade=CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "userId")
     private User user;
 
