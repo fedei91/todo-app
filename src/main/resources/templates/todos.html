@@ -42,7 +42,7 @@
 
 			<div class="container p-3 my-3 border">
 				<form method="post" th:action="@{/todos/additem}" th:object="${addItemForm}">
-					<input th:field="*{description}" type="text">
+					<input th:field="*{description}" required type="text">
 					<button>Add item</button>
 				</form>
 			</div>
