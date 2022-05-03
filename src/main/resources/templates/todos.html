@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="nl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-	<head th:replace="fragments::head(title='Index')">
+	<head th:replace="fragments::head(title='To do')">
 	</head>
 	<body>
 		<nav th:replace="fragments::menu"></nav>
@@ -13,31 +13,34 @@
 			</div>
 
 			<th:block th:if="${todos}" th:object="${todos}">
-
-				<form th:action="@{/todos/deleteitems}" method="post">
-					<div class="container p-3 my-3 border">
-						<table class="table table-striped">
+				<form method="post" th:action="@{/todos/deleteitems}">
+					<table class="table table-striped">
+						<thead>
 							<tr>
 								<!-- <th scope="col">#</th> -->
 								<th scope="col">Item description</th>
 								<th scope="col">Done</th>
 								<th scope="col"></th>
 							</tr>
-							</thead>
-							<tbody>
-								<tr th:each="todo : ${todos}" th:object="${todo}">
-									<!-- <th scope="row" th:text="${todo.id}"></th> -->
-									<th scope="row" th:text="${todo.itemDescription}"></th>
-									<th scope="row" th:text="${todo.itemDone}"></th>
-									<th scope="row">
-										<input th:field="${todoItemForm.selectedTodoItemsIds}" type="checkbox" name="id" th:value="*{id}">
-									</th>
-								</tr>
-							</tbody>
-						</table>
-						<button>Delete items</button>
-					</div>
+						</thead>
+						<tbody>
+							<tr th:each="todo : ${todos}" th:object="${todo}">
+								<!-- <th scope="row" th:text="${todo.id}"></th> -->
+								<th scope="row" th:text="${todo.itemDescription}"></th>
+								<th scope="row" th:text="${todo.itemDone}"></th>
+								<th scope="row">
+									<input th:field="${todoItemForm.selectedTodoItemsIds}" type="checkbox" name="id"
+										   th:value="*{id}">
+								</th>
+							</tr>
+						</tbody>
+					</table>
+					<button type="submit">Delete items</button>
+					<button type="submit" th:formaction="@{/todos/updateitem}">Update</button>
 				</form>
+
+				<table></table>
+
 			</th:block>
 
 			<div class="container p-3 my-3 border">
@@ -45,10 +48,6 @@
 					<input th:field="*{description}" required type="text">
 					<button>Add item</button>
 				</form>
-			</div>
-
-			<div class="container p-3 my-3 border">
-				<button>Update</button>
 			</div>
 
 			<div sec:authorize="isAuthenticated()">

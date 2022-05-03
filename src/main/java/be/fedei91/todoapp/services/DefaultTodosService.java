@@ -38,11 +38,6 @@ class DefaultTodosService implements TodosService {
     }
 
     @Override
-    public TodoItem update(TodoItem item) {
-        return todosRepository.save(item);
-    }
-
-    @Override
     public void delete(long id) {
         try {
             todosRepository.deleteById(id);
@@ -55,5 +50,14 @@ class DefaultTodosService implements TodosService {
     @Transactional(readOnly = true)
     public List<TodoItem> findItemsByIds(Set<Long> ids) {
         return todosRepository.findItemsByIds(ids);
+    }
+
+    @Override
+    public void update(Set<Long> ids) {
+        List<TodoItem> itemsToUpdate =  todosRepository.findItemsByIds(ids);
+        itemsToUpdate
+                .forEach(
+                        todoItem -> todoItem.setItemDone(!todoItem.getItemDone())
+                );
     }
 }

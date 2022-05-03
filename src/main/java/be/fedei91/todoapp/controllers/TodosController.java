@@ -31,7 +31,9 @@ class TodosController {
     @GetMapping
     public ModelAndView showTodosFromUser(Principal principal) {
         var modelAnView = new ModelAndView("todos");
-        modelAnView.addObject("todos", todosService.findAllByUserEmail(principal.getName()));
+        if (!todosService.findAllByUserEmail(principal.getName()).isEmpty()) {
+            modelAnView.addObject("todos", todosService.findAllByUserEmail(principal.getName()));
+        }
         modelAnView.addObject("todoItemForm", new TodoItemForm(null));
         modelAnView.addObject("addItemForm", new AddItemForm(null));
         return modelAnView;
@@ -63,6 +65,17 @@ class TodosController {
                 .forEach(
                         item -> todosService.delete(item.getId())
                 );
+        return new ModelAndView("redirect:/todos");
+    }
+
+    @PostMapping("/updateitem")
+    public ModelAndView update(@Valid TodoItemForm form, Errors errors) {
+        if (errors.hasErrors()) {
+            return new ModelAndView("todos");
+        }
+
+        todosService.update(form.getSelectedTodoItemsIds());
+
         return new ModelAndView("redirect:/todos");
     }
 }

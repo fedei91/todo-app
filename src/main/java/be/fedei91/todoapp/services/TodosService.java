@@ -11,6 +11,6 @@ public interface TodosService {
     Optional<TodoItem> findTodoById(long id);
     TodoItem create(TodoItem item);
     void delete(long id);
-    TodoItem update(TodoItem item);
+    void update(Set<Long> ids);
     List<TodoItem> findItemsByIds(Set<Long> ids);
 }
